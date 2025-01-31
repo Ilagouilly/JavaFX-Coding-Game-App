@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class QuizApp extends Application {
+public class JavaCodingGame extends Application {
 
     private static Stage primaryStage;
 
@@ -15,12 +15,12 @@ public class QuizApp extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         setRoot("welcome"); // Load the welcome view initially
-        primaryStage.setTitle("Welcome to the JavaFX Quiz App");
+        primaryStage.setTitle("Welcome to the Java Coding Game");
         primaryStage.show();
     }
 
     public static void setRoot(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(QuizApp.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(JavaCodingGame.class.getResource(fxml + ".fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setScene(new Scene(root, 800, 600));
     }
