@@ -1,4 +1,4 @@
-package com.ismaillagouilly;
+package com.ismaillagouilly.model;
 
 import java.util.List;
 

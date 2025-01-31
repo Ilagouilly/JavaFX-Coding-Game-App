@@ -1,4 +1,4 @@
-package com.ismaillagouilly;
+package com.ismaillagouilly.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.collections.FXCollections;
 
@@ -33,25 +34,22 @@ public class WelcomeController {
         // Populate ComboBox with difficulty levels
         difficultyComboBox.setItems(FXCollections.observableArrayList("Easy", "Medium", "Hard"));
         questionCountField.setItems(FXCollections.observableArrayList(5, 10, 20, 30, 40, 50));
+
+        // Optional: Set default values
+        difficultyComboBox.setValue("Medium");
+        questionCountField.setValue(5);
     }
 
     @FXML
     private void startQuiz() {
-        // Handle start quiz logic here
         Integer questionCount = questionCountField.getValue();
         String difficulty = difficultyComboBox.getValue();
 
-        // Check if any field is empty
-        if ((questionCount != null && questionCount == 0) || difficulty == null) {
-            // Show alert for missing fields
-            showAlert("All fields are mandatory!");
-        } else {
-            System.out.println("Questions: " + questionCount);
-            System.out.println("Difficulty: " + difficulty);
-
-            // Transition to the next screen (e.g., a quiz screen)
-            loadQuizScreen(questionCount, difficulty);
+        if (questionCount == null || difficulty == null) {
+            showAlert("Please select question count and difficulty!");
+            return;
         }
+        loadQuizScreen(questionCount, difficulty);
     }
 
     private void showAlert(String message) {
@@ -64,7 +62,14 @@ public class WelcomeController {
 
     private void loadQuizScreen(Integer questionCount, String difficulty) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("quizScreen.fxml"));
+            String path = "/com/ismaillagouilly/views/quizScreen.fxml";
+            URL resource = getClass().getResource(path);
+
+            if (resource == null) {
+                throw new IOException("FXML file not found: " + path);
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
             Parent root = loader.load();
 
             // Pass user data to the quiz controller
@@ -77,6 +82,7 @@ public class WelcomeController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + e.getMessage());
             e.printStackTrace();
         }
     }

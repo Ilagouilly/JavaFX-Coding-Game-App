@@ -1,8 +1,14 @@
-package com.ismaillagouilly;
+package com.ismaillagouilly.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import com.ismaillagouilly.model.QuestionData;
+import com.ismaillagouilly.service.GeminiAIQuestionGenerator;
+import com.ismaillagouilly.service.QuestionService;
+
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,13 +38,20 @@ public class QuizController {
     private List<QuestionData> questions; // List of questions
     private int currentQuestionIndex = 0; // Track current question
     private final Map<Button, String> answerMap = new HashMap<>();
+    private QuestionService questionService;
+
+    public QuizController() {
+        this.questionService = new GeminiAIQuestionGenerator();
+    }
 
     public void initializeQuiz(Integer questionCount, String difficultyLevel) {
-        questions = GeminiAPI.getQuestionsAndAnswers(questionCount, difficultyLevel);
+        questions = questionService.generateQuestions(questionCount, difficultyLevel);
+
         if (questions == null || questions.isEmpty()) {
             explanationLabel.setText("⚠️ Error loading questions. Please try again.");
             return;
         }
+
         loadQuestion(currentQuestionIndex);
     }
 
@@ -72,12 +85,22 @@ public class QuizController {
 
     private void returnToWelcomePage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+            String path = "/com/ismaillagouilly/views/welcomeScreen.fxml";
+            URL resource = getClass().getResource(path);
+
+            if (resource == null) {
+                throw new IOException("FXML file not found: " + path);
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
             Parent root = loader.load();
+
+            // Get current stage and switch to welcome screen
             Stage stage = (Stage) explanationLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + e.getMessage());
             e.printStackTrace();
         }
     }

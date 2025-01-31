@@ -5,6 +5,10 @@ module com.ismaillagouilly {
     requires java.net.http;
     requires dotenv.java;
 
-    opens com.ismaillagouilly to javafx.fxml;
-    exports com.ismaillagouilly;
+    opens com.ismaillagouilly.controller to javafx.fxml;
+    exports com.ismaillagouilly.controller;
+    exports com.ismaillagouilly.app;
+    opens com.ismaillagouilly.app to javafx.fxml;
+    exports com.ismaillagouilly.model;
+    opens com.ismaillagouilly.model to javafx.fxml;
 }
