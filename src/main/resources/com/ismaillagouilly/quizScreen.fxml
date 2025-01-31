@@ -17,38 +17,41 @@
         <VBox spacing="15.0" alignment="CENTER"
               style="-fx-background-color: white; -fx-padding: 30px; -fx-background-radius: 15px; 
                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5); 
-                     -fx-min-width: 800px; -fx-max-width: 800px;">
+                     -fx-min-width: 2000px; -fx-max-width: 4000px;
+                     -fx-min-height: 600px; -fx-max-height: 800px;">
 
             <!-- Question Label -->
             <Label fx:id="questionLabel"
                    text="Loading Questions..."
-                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-min-width: 800px; -fx-max-width: 800px;"/>
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-min-width: 800px; -fx-max-width: 2500px;
+                   -fx-min-height: 200px; -fx-max-height: 800px;"/>
 
             <!-- Answer Buttons -->
             <VBox spacing="10.0">
                 <Button fx:id="answer1Button" text="Answer 1"
-                        style="-fx-background-color: #e1e1e1; -fx-font-size: 14px; -fx-padding: 10px; -fx-background-radius: 5px;
+                        style="-fx-background-color: #e1e1e1; -fx-font-size: 18px; -fx-padding: 20px; -fx-background-radius: 5px;
                         -fx-min-width: 800px; -fx-max-width: 800px;"/>
                 <Button fx:id="answer2Button" text="Answer 2"
-                        style="-fx-background-color: #e1e1e1; -fx-font-size: 14px; -fx-padding: 10px; -fx-background-radius: 5px;
+                        style="-fx-background-color: #e1e1e1; -fx-font-size: 18px; -fx-padding: 20px; -fx-background-radius: 5px;
                         -fx-min-width: 800px; -fx-max-width: 800px;"/>
                 <Button fx:id="answer3Button" text="Answer 3"
-                        style="-fx-background-color: #e1e1e1; -fx-font-size: 14px; -fx-padding: 10px; -fx-background-radius: 5px;
+                        style="-fx-background-color: #e1e1e1; -fx-font-size: 18px; -fx-padding: 20px; -fx-background-radius: 5px;
                         -fx-min-width: 800px; -fx-max-width: 800px;"/>
                 <Button fx:id="answer4Button" text="Answer 4"
-                        style="-fx-background-color: #e1e1e1; -fx-font-size: 14px; -fx-padding: 10px; -fx-background-radius: 5px;
+                        style="-fx-background-color: #e1e1e1; -fx-font-size: 18px; -fx-padding: 20px; -fx-background-radius: 5px;
                         -fx-min-width: 800px; -fx-max-width: 800px;"/>
             </VBox>
 
             <!-- Validate Button -->
             <Button fx:id="validateButton" text="Validate Answer"
                     style="-fx-background-color: #0078D7; -fx-text-fill: white; 
-                           -fx-font-size: 14px; -fx-padding: 8px; -fx-background-radius: 5px;"/>
+                           -fx-font-size: 18px; -fx-padding: 8px; -fx-background-radius: 5px;"/>
 
             <!-- Explanation Label -->
             <Label fx:id="explanationLabel"
                    text=""
-                   style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+                   style="-fx-font-size: 18px; -fx-text-fill: #555; -fx-min-width: 800px; -fx-max-width: 1200px;
+                   -fx-min-height: 100px; -fx-max-height: 100px;"/>
         </VBox>
     </VBox>
 

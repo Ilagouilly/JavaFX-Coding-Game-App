@@ -21,7 +21,7 @@ public class GeminiAPI {
     // Use the API_KEY from the loaded environment variables
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=" + dotenv.get("API_KEY");
 
-    public static List<QuestionData> getQuestionsAndAnswers(String questionCount, String difficultyLevel) {
+    public static List<QuestionData> getQuestionsAndAnswers(Integer questionCount, String difficultyLevel) {
         List<QuestionData> questionList = new ArrayList<>();
 
         try {

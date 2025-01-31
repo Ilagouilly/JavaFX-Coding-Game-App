@@ -17,13 +17,10 @@ import javafx.collections.FXCollections;
 public class WelcomeController {
 
     @FXML
-    private TextField nameField;
-
-    @FXML
     private TextField emailField;
 
     @FXML
-    private TextField questionCountField;
+    private ComboBox<Integer> questionCountField;
 
     @FXML
     private ComboBox<String> difficultyComboBox;
@@ -35,26 +32,25 @@ public class WelcomeController {
     public void initialize() {
         // Populate ComboBox with difficulty levels
         difficultyComboBox.setItems(FXCollections.observableArrayList("Easy", "Medium", "Hard"));
+        questionCountField.setItems(FXCollections.observableArrayList(5, 10, 20, 30, 40, 50));
     }
 
     @FXML
     private void startQuiz() {
         // Handle start quiz logic here
-        String name = nameField.getText();
-        String questionCount = questionCountField.getText();
+        Integer questionCount = questionCountField.getValue();
         String difficulty = difficultyComboBox.getValue();
 
         // Check if any field is empty
-        if (name.isEmpty() || questionCount.isEmpty() || difficulty == null) {
+        if ((questionCount != null && questionCount == 0) || difficulty == null) {
             // Show alert for missing fields
             showAlert("All fields are mandatory!");
         } else {
-            System.out.println("Name: " + name);
             System.out.println("Questions: " + questionCount);
             System.out.println("Difficulty: " + difficulty);
 
             // Transition to the next screen (e.g., a quiz screen)
-            loadQuizScreen(name, questionCount, difficulty);
+            loadQuizScreen(questionCount, difficulty);
         }
     }
 
@@ -66,24 +62,23 @@ public class WelcomeController {
         alert.showAndWait();
     }
 
-private void loadQuizScreen(String name, String questionCount, String difficulty) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("quizScreen.fxml"));
-        Parent root = loader.load();
+    private void loadQuizScreen(Integer questionCount, String difficulty) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("quizScreen.fxml"));
+            Parent root = loader.load();
 
-        // Pass user data to the quiz controller
-        QuizController quizController = loader.getController();
-        quizController.initializeQuiz(questionCount, difficulty);
+            // Pass user data to the quiz controller
+            QuizController quizController = loader.getController();
+            quizController.initializeQuiz(questionCount, difficulty);
 
-        // Switch to the quiz screen
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) startQuizButton.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            // Switch to the quiz screen
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) startQuizButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
-
 
 }

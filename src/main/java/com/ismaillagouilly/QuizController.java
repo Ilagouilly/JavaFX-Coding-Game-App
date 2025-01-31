@@ -33,7 +33,7 @@ public class QuizController {
     private int currentQuestionIndex = 0; // Track current question
     private final Map<Button, String> answerMap = new HashMap<>();
 
-    public void initializeQuiz(String questionCount, String difficultyLevel) {
+    public void initializeQuiz(Integer questionCount, String difficultyLevel) {
         questions = GeminiAPI.getQuestionsAndAnswers(questionCount, difficultyLevel);
         if (questions == null || questions.isEmpty()) {
             explanationLabel.setText("⚠️ Error loading questions. Please try again.");
@@ -44,10 +44,11 @@ public class QuizController {
 
     private void loadQuestion(int index) {
         if (index >= questions.size()) {
-            explanationLabel.setText("🎉 Quiz Completed! Click here to return.");
+            explanationLabel.setText("🎉 Quiz Completed!");
 
             // Make the label clickable to return to the Welcome Page
-            explanationLabel.setOnMouseClicked(event -> returnToWelcomePage());
+            validateButton.setText("Return to Welcome Page");
+            validateButton.setOnAction(event -> returnToWelcomePage());
             return;
         }
 
@@ -107,6 +108,7 @@ public class QuizController {
                 Thread.sleep(2000); // 2-second delay before next question
                 javafx.application.Platform.runLater(() -> {
                     validateButton.setDisable(false);
+                    explanationLabel.setText("");
                     loadQuestion(++currentQuestionIndex);
                 });
             } catch (InterruptedException e) {

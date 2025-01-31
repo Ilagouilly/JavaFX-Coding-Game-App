@@ -26,11 +26,8 @@
             <Label text="Enter your details to start:" 
                    style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
             
-            <TextField fx:id="nameField" promptText="Enter your name" 
-                       style="-fx-pref-width: 400px; -fx-font-size: 14px; -fx-padding: 8px;"/>
-            
-            <TextField fx:id="questionCountField" promptText="Number of Questions" 
-                       style="-fx-pref-width: 400px; -fx-font-size: 14px; -fx-padding: 8px;"/>
+            <ComboBox fx:id="questionCountField" promptText="Number of Questions" 
+                       style="-fx-pref-width: 400px; -fx-font-size: 14px;"/>
                        
             <ComboBox fx:id="difficultyComboBox" promptText="Select Difficulty" 
                        style="-fx-pref-width: 400px; -fx-font-size: 14px;"/>
