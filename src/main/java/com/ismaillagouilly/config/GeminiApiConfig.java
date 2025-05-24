@@ -1,12 +1,8 @@
 package com.ismaillagouilly.config;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 public class GeminiApiConfig {
-    private static final Dotenv dotenv = Dotenv.load();
-
     public static String getGeminiApiKey() {
-        return dotenv.get("API_KEY");
+        return System.getenv("API_KEY");
     }
 
     public static String getGeminiApiUrl() {
