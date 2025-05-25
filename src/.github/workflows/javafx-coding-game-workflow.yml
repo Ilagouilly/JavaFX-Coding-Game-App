@@ -1,0 +1,32 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Run tests with Maven
+        run: |
+          xvfb-run --server-args="-screen 0 1024x768x24" mvn test
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          TESTFX_HEADLESS: true
+          JAVA_TOOL_OPTIONS: -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw
