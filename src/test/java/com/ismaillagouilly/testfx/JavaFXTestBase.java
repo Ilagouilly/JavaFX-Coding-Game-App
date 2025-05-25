@@ -24,6 +24,8 @@ public class JavaFXTestBase extends ApplicationTest {
         System.setProperty("prism.order", "sw");
         System.setProperty("prism.text", "t2k");
         System.setProperty("java.awt.headless", "true");
+        System.setProperty("glass.platform", "Monocle");
+        System.setProperty("monocle.platform", "Headless");
 
         robot = new FxRobot();
     }
