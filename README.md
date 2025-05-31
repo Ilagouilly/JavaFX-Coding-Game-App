@@ -37,7 +37,7 @@ This project is an interactive **Java coding game** built with **JavaFX**, lever
 
 2. Create an `.env` file at the project root and add your Gemini API key:
    ```
-   API_KEY=XXXX
+   API_KEY=XXX
    ```
    Get your API key from [Google AI Gemini API](https://ai.google.dev/gemini-api/docs/api-key).
 
